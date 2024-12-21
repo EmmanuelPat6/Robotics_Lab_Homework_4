@@ -32,25 +32,22 @@ This README file will show the instructions on how to build and run the Homework
     ```
 
 ## Implementation 💻
-### Spherical Object Detection  
+### Follow 4 given Goals
 
-1. 🤖🤖 An instruction to spawn the robot in Gazebo inside the world containing the **Spherical Object**
+1. 🤖🤖 An instruction to spawn the robot in Gazebo
     ```shell
-    ros2 launch iiwa_bringup iiwa_sphere.launch.py use_sim:=true use_vision:=true
+    ros2 launch rl_fra2mo_description gazebo_fra2mo.launch.py
     ```
-    `use_sim:=true` to spawn the robot in Gazebo and `use_vision:=true` to spawn the robot with a **Camera Sensor**
+⚠️⚠️⚠️ It is **NECESSARY** to press the play button in the bottom left corner to run the next instructions ⚠️⚠️⚠️
 
-⚠️⚠️⚠️ It is **NECESSARY** to act very quickly by pressing the play button in the bottom left corner to ensure the controllers are activated. If this is not done, you will need to close Gazebo, reissue the same command, and repeat the steps. ⚠️⚠️⚠️
-
-2. 📷🎥 An istruction to view the image send by the **Camera Sensor** to the manipulator  
+2. 🚀🧭 An istruction to launch `SLAM`, `Exploration` and `Nav2`
     ```shell
-    ros2 run rqt_image_view rqt_image_view
+    ros2 launch rl_fra2mo_description fra2mo_explore.launch.py
     ```
-   selecting the topic `/videocamera`
-
-3. 🪟🕵️‍♂️ An istruction to open a new window in which it is possible to see the **Detection** of the **Spherical Object** executed by the manipulator through the **Camera Sensor**
+    
+3. 🔧⚙️ An istruction to run the `async_slam_toolbox_node`
     ```shell
-    ros2 run ros2_opencv ros2_opencv_node
+    ros2 launch rl_fra2mo_description fra2mo_slam.launch.py
     ```
     
 ### Vision-Based Control with Velocity Commands 🏎️📷
