@@ -89,7 +89,7 @@ The instructions are mostly the same as before. In this case, only the `Initial 
     ros2 launch rl_fra2mo_description display_fra2mo.launch.py
    ```
    
-5.  An instruction to follow 5 Waypoints in order to Map the entire Environment
+5. 🗺️🌎 An instruction to follow 5 Waypoints in order to Map the entire Environment
    ```shell
     ros2 run rl_fra2mo_description follow_more_waypoints.py 
    ```
@@ -125,7 +125,15 @@ The `Map` obtained by this implementation is shown not only in the Report but th
     ros2 run rl_fra2mo_description follow_aruco_waypoints.py 
    ```
    ⚠️⚠️⚠️ As before,y default the `Initial Position` of the Robot in Gazebo is the `Origin`. It is possible, according to the Homework specification, to change it in the file `gazebo_fra2mo.launch.py` at `line 60` in `position = [-3.0, 3.5, 0.100, -1.57]`
-    (by default it is `position = [0.0, 0.0, 0.100, 0.0]`). In this case, this `5.` instruction must be different⚠️⚠️⚠️
+    (by default it is `position = [0.0, 0.0, 0.100, 0.0]`). In this case, this `4.` instruction must be different⚠️⚠️⚠️
    ```shell
-    ros2 run rl_fra2mo_description follow_waypoints_no_origin.py 
+    ros2 run rl_fra2mo_description follow_aruco_waypoints_no_origin.py 
    ```
+   This is **NECESSARY** because, in the second case, the `Map Frame` is different and some additional steps are required to publish the `ArUco Pose` while maintaining the reference of `Gazebo Map Frame`
+
+ ### ArUco TF Publishing 📸🔄
+ 5. In addition to the instructions of the previous point, it is possible to add an additional instruction that allows me to print the `ArUco Pose` on the screen as a `STATIC TF` once detected. To do this run:
+     ```shell
+        ros2 topic echo tf_static
+    ```
+
