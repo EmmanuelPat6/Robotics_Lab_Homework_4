@@ -50,67 +50,82 @@ This README file will show the instructions on how to build and run the Homework
     ros2 launch rl_fra2mo_description fra2mo_slam.launch.py
     ```
     
-### Vision-Based Control with Velocity Commands 🏎️📷
-
-1. 🤖🤖 An instruction to spawn the robot in Gazebo inside the world containing the **ArUco Tag 201** with a **Velocity Controller**
-    ```shell
-    ros2 launch iiwa_bringup iiwa.launch.py command_interface:="velocity" robot_controller:="velocity_controller" use_sim:=true use_vision:=true
-    ```
-    `command_interface:="velocity"` and `robot_controller:="velocity_controller"` to spawn the robot with a **Velocity Interfare** and a **Velocity Controller**, `use_sim:=true` to spawn the robot in Gazebo and `use_vision:=true` to spawn the robot with a **Camera Sensor**
-
-⚠️⚠️⚠️ It is **NECESSARY** to act very quickly by pressing the play button in the bottom left corner to ensure the controllers are activated. If this is not done, you will need to close Gazebo, reissue the same command, and repeat the steps. ⚠️⚠️⚠️
-
-2. 📐📏 An istruction to allow the **ArUco Tag 201 Detection**  
-    ```shell
-    ros2 launch aruco_ros single.launch.py 
-    ```
+4. 🌐🔭 An instruction to start `Rviz2` with the `explore.rviz` configuration
+   ```shell
+    ros2 launch rl_fra2mo_description display_fra2mo.launch.py
+   ```
    
-3. 🗺️📸 An istruction to see the environment with the **ArUco Detection** through the **Camera Sensor**
+5. ➡️📍➡️📍➡️📍➡️📍 An instruction to follow the 4 given Waypoints
+   ```shell
+    ros2 run rl_fra2mo_description follow_waypoints.py 
+   ```
+    ⚠️⚠️⚠️ By default the `Initial Position` of the Robot in Gazebo is the `Origin`. It is possible, according to the Homework specification, to change it in the file `gazebo_fra2mo.launch.py` at `line 60` in `position = [-3.0, 3.5, 0.100, -1.57]`
+    (by default it is `position = [0.0, 0.0, 0.100, 0.0]`). In this case, this `5.` instruction must be different⚠️⚠️⚠️
+   ```shell
+    ros2 run rl_fra2mo_description follow_waypoints_no_origin.py 
+   ```
+    
+### Map the Environment 🔃🛰️
+The instructions are mostly the same as before. In this case, only the `Initial Position` in the `Origin` will be considered (so, if you change in the previous point the position in `gazebo_fra2mo.launch.py`, let's modify it again in `position = [0.0, 0.0, 0.100, 0.0]` by default)
+
+1. 🤖🤖 An instruction to spawn the robot in Gazebo
+    ```shell
+    ros2 launch rl_fra2mo_description gazebo_fra2mo.launch.py
+    ```
+⚠️⚠️⚠️ It is **NECESSARY** to press the play button in the bottom left corner to run the next instructions ⚠️⚠️⚠️
+
+2. 🚀🧭 An istruction to launch `SLAM`, `Exploration` and `Nav2`
+    ```shell
+    ros2 launch rl_fra2mo_description fra2mo_explore.launch.py
+    ```
+    
+3. 🔧⚙️ An istruction to run the `async_slam_toolbox_node`
+    ```shell
+    ros2 launch rl_fra2mo_description fra2mo_slam.launch.py
+    ```
+    
+4. 🌐🔭 An instruction to start `Rviz2` with the `explore.rviz` configuration
+   ```shell
+    ros2 launch rl_fra2mo_description display_fra2mo.launch.py
+   ```
+   
+5.  An instruction to follow 5 Waypoints in order to Map the entire Environment
+   ```shell
+    ros2 run rl_fra2mo_description follow_more_waypoints.py 
+   ```
+
+The `Map` obtained by this implementation is shown not only in the Report but there is also the file `map.pgm` in this Repository.
+
+
+ ### Vision-Based Navigation 📷🛤️
+
+1. 🤖🤖 An instruction to spawn the robot in Gazebo
+    ```shell
+    ros2 launch rl_fra2mo_description gazebo_fra2mo.launch.py
+    ```
+⚠️⚠️⚠️ It is **NECESSARY** to press the play button in the bottom left corner to run the next instructions ⚠️⚠️⚠️
+
+2. 🚀🧭 An istruction to launch both `Navigation` and `aruco_ros` node using the Robot `Camera` added
+    ```shell
+    ros2 launch rl_fra2mo_description fra2mo_aruco.launch.py 
+    ```
+    
+3. 📷🎥 An istruction to show what the fra2mo Robot see and the detection of the ArUco Tag
     ```shell
     ros2 run rqt_image_view rqt_image_view
     ```
-    selecting the topic `/aruco_single/result`
+   and select the topic `/aruco_single/result`
 
-4. 🚀📍An instruction to do the **Positioning Task** in order to align the **Camera** to the **ArUco Marker** with a desired **Position and Orientation Offsets**
+4. ⛵🤙 An instruction to implement a `2D Navigation Task` following this logic
+   - Send the robot in the proximiti of `Obstacle 9` ➡️🛑
+   - Make the Robot look for the `ArUco Marker`. Once detected, its `Pose` is retrieved with respect the `Map Frame` 📷🔍
+   - Return the Robot to the `Initial Position` 🔙🏁
+     
    ```shell
-    ros2 run ros2_kdl_package ros2_kdl_node_vision_control 
-    ```
-5. 👀🎯After that the **Positioning** is completed (wait the message `Positioning Task Executed Successfully ...`) it is possible to run in this last terminal, after pressing `ctrl+C`, the final instruction
+    ros2 run rl_fra2mo_description follow_aruco_waypoints.py 
+   ```
+   ⚠️⚠️⚠️ As before,y default the `Initial Position` of the Robot in Gazebo is the `Origin`. It is possible, according to the Homework specification, to change it in the file `gazebo_fra2mo.launch.py` at `line 60` in `position = [-3.0, 3.5, 0.100, -1.57]`
+    (by default it is `position = [0.0, 0.0, 0.100, 0.0]`). In this case, this `5.` instruction must be different⚠️⚠️⚠️
    ```shell
-    ros2 run ros2_kdl_package ros2_kdl_node_vision_control --ros-args -p task:=look-at-point
-    ```
-   which performs a **Look-at-Point Task** using a desired **Control Law** specified in the code and in the report. Now it is possible to move the ArUco Tag with the realtive interface and the center of the **Camera Sensor** will align with      the center of the Tag.
-
- ### Vision-Based Control with Effort Commands 🦾📷
-For this another file called `ros2_kdl_vision_effort_control.cpp` has been implemented.
-
-1. 🤖🤖 An instruction to spawn the robot in Gazebo inside the world containing the **ArUco Tag 201** with a **Effort Controller**
-    ```shell
-    ros2 launch iiwa_bringup iiwa.launch.py command_interface:="effort" robot_controller:="effort_controller" use_sim:=true use_vision:=true
-    ```
-    `command_interface:="velocity"` and `robot_controller:="velocity_controller"` to spawn the robot with a **Velocity Interfare** and a **Velocity Controller**, `use_sim:=true` to spawn the robot in Gazebo and `use_vision:=true` to spawn the robot with a **Camera Sensor**
-
-⚠️⚠️⚠️ It is **NECESSARY** to act very quickly by pressing the play button in the bottom left corner to ensure the controllers are activated. If this is not done, you will need to close Gazebo, reissue the same command, and repeat the steps. ⚠️⚠️⚠️
-
-2. 📐📏 An istruction to allow the **ArUco Tag 201 Detection**  
-    ```shell
-    ros2 launch aruco_ros single.launch.py 
-    ```
-   
-3. 🗺️📸 An istruction to see the environment with the **ArUco Detection** through the **Camera Sensor**
-    ```shell
-    ros2 run rqt_image_view rqt_image_view
-    ```
-    selecting the topic `/aruco_single/result`
-
-4. 🚀📍An instruction to do the **Positioning Task** in order to align the **Camera** to the **ArUco Marker** with a desired **Position and Orientation Offsets**
-   ```shell
-    ros2 run ros2_kdl_package ros2_kdl_node_vision_effort_control --ros-args -p task:=positioning
-    ```
-5. 👀📏An instruction to do the **Look-at-Point Task** with a **Linear Trajectory**
-   ```shell
-    ros2 run ros2_kdl_package ros2_kdl_node_vision_effort_control --ros-args -p task:=look-at-point
-    ```
-   which, using a new **Orientation Error** given by `sd-s`, implement the **Linear Trajectory** implemented in the previous Homework but looking, during it, the **ArUco Tag**. It is advisable not to run this instruction after the               positioning but to re-execute the initial instructions and respawn the robot in its initial position.
-
-To implement these last two points with the **Operational Space Inverse Dynamics Control** it is sufficient to add at teh end of each instruction `-p cmd_interface:=cart_effort`
+    ros2 run rl_fra2mo_description follow_waypoints_no_origin.py 
+   ```
