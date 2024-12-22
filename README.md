@@ -117,7 +117,7 @@ The `Map` obtained by this implementation is shown not only in the Report but th
    and select the topic `/aruco_single/result`
 
 4. ⛵🤙 An instruction to implement a `2D Navigation Task` following this logic
-   - Send the robot in the proximiti of `Obstacle 9` ➡️🛑
+   - Send the robot in the proximity of `Obstacle 9` ➡️🛑
    - Make the Robot look for the `ArUco Marker`. Once detected, its `Pose` is retrieved with respect the `Map Frame` 📷🔍
    - Return the Robot to the `Initial Position` 🔙🏁
      
