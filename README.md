@@ -52,17 +52,17 @@ This README file will show the instructions on how to build and run the Homework
     
 4. 🌐🔭 An instruction to start `Rviz2` with the `explore.rviz` configuration
    ```shell
-    ros2 launch rl_fra2mo_description display_fra2mo.launch.py
+   ros2 launch rl_fra2mo_description display_fra2mo.launch.py
    ```
    
 5. ➡️📍➡️📍➡️📍➡️📍 An instruction to follow the 4 given Waypoints
    ```shell
-    ros2 run rl_fra2mo_description follow_waypoints.py 
+   ros2 run rl_fra2mo_description follow_waypoints.py 
    ```
     ⚠️⚠️⚠️ By default the `Initial Position` of the Robot in Gazebo is the `Origin`. It is possible, according to the Homework specification, to change it in the file `gazebo_fra2mo.launch.py` at `line 60` in `position = [-3.0, 3.5, 0.100, -1.57]`
     (by default it is `position = [0.0, 0.0, 0.100, 0.0]`). In this case, this `5.` instruction must be different⚠️⚠️⚠️
    ```shell
-    ros2 run rl_fra2mo_description follow_waypoints_no_origin.py 
+   ros2 run rl_fra2mo_description follow_waypoints_no_origin.py 
    ```
     
 ### Map the Environment 🔃🛰️
