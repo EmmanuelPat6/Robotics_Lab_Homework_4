@@ -132,7 +132,7 @@ The `Map` obtained by this implementation is shown not only in the Report but th
    This is **NECESSARY** because, in the second case, the `Map Frame` is different and some additional steps are required to publish the `ArUco Pose` while maintaining the reference of `Gazebo Map Frame`
 
  ### ArUco TF Publishing 📸🔄
- 5. In addition to the instructions of the previous point, it is possible to add an additional instruction that allows me to print the `ArUco Pose` on the screen as a `STATIC TF` once detected. To do this run:
+ 5. In addition to the instructions of the previous point, it is possible to add an additional instruction that allows you to print the `ArUco Pose` on the screen as a `STATIC TF` once detected. To do this run:
     ```shell
     ros2 topic echo tf_static
     ```
