@@ -124,7 +124,7 @@ The `Map` obtained by this implementation is shown not only in the Report but th
    ```shell
    ros2 run rl_fra2mo_description follow_aruco_waypoints.py 
    ```
-   ⚠️⚠️⚠️ As before,y default the `Initial Position` of the Robot in Gazebo is the `Origin`. It is possible, according to the Homework specification, to change it in the file `gazebo_fra2mo.launch.py` at `line 60` in `position = [-3.0, 3.5, 0.100, -1.57]`
+   ⚠️⚠️⚠️ As before, by default the `Initial Position` of the Robot in Gazebo is the `Origin`. It is possible, according to the Homework specification, to change it in the file `gazebo_fra2mo.launch.py` at `line 60` in `position = [-3.0, 3.5, 0.100, -1.57]`
     (by default it is `position = [0.0, 0.0, 0.100, 0.0]`). In this case, this `4.` instruction must be different⚠️⚠️⚠️
    ```shell
    ros2 run rl_fra2mo_description follow_aruco_waypoints_no_origin.py 
