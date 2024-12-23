@@ -93,7 +93,7 @@ The instructions are mostly the same as before. In this case, only the `Initial 
    ```shell
    ros2 run rl_fra2mo_description follow_more_waypoints.py 
    ```
-6. 💾✅To save the obtained Map run
+6. 💾✅ To save the obtained `Map` run
    ```shell
    ros2 run nav2_map_server map_saver_cli -f map
    ```
