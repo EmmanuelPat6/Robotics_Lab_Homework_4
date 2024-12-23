@@ -60,13 +60,13 @@ This README file will show the instructions on how to build and run the Homework
    ros2 run rl_fra2mo_description follow_waypoints.py 
    ```
     ⚠️⚠️⚠️ By default the `Initial Position` of the Robot in Gazebo is the `Origin`. It is possible, according to the Homework specification, to change it in the file `gazebo_fra2mo.launch.py` at `line 60` in `position = [-3.0, 3.5, 0.100, -1.57]`
-    (by default it is `position = [0.0, 0.0, 0.100, 0.0]`). In this case, this `5.` instruction must be different⚠️⚠️⚠️
+    (by default it is `position = [0.0, 0.0, 0.100, 0.0]`). When you change the Initial Position do a `colcon build`. In this case, this `5.` instruction must be different⚠️⚠️⚠️
    ```shell
    ros2 run rl_fra2mo_description follow_waypoints_no_origin.py 
    ```
     
 ### Map the Environment 🔃🛰️
-The instructions are mostly the same as before. In this case, only the `Initial Position` in the `Origin` will be considered (so, if you change in the previous point the position in `gazebo_fra2mo.launch.py`, let's modify it again in `position = [0.0, 0.0, 0.100, 0.0]` by default)
+The instructions are mostly the same as before. In this case, only the `Initial Position` in the `Origin` will be considered (so, if you change in the previous point the position in `gazebo_fra2mo.launch.py`, let's modify it again in `position = [0.0, 0.0, 0.100, 0.0]` by default and do a `colcon build`)
 
 1. 🤖🤖 An instruction to spawn the robot in Gazebo
     ```shell
@@ -125,7 +125,7 @@ The `Map` obtained by this implementation is shown not only in the Report but th
    ros2 run rl_fra2mo_description follow_aruco_waypoints.py 
    ```
    ⚠️⚠️⚠️ As before, by default the `Initial Position` of the Robot in Gazebo is the `Origin`. It is possible, according to the Homework specification, to change it in the file `gazebo_fra2mo.launch.py` at `line 60` in `position = [-3.0, 3.5, 0.100, -1.57]`
-    (by default it is `position = [0.0, 0.0, 0.100, 0.0]`). In this case, this `4.` instruction must be different⚠️⚠️⚠️
+    (by default it is `position = [0.0, 0.0, 0.100, 0.0]`). When you change the Initial Position do a `colcon build`. In this case, this `4.` instruction must be different⚠️⚠️⚠️
    ```shell
    ros2 run rl_fra2mo_description follow_aruco_waypoints_no_origin.py 
    ```
