@@ -136,7 +136,7 @@ The `Map` obtained by this implementation is shown not only in the Report but th
     ```shell
     ros2 topic echo tf_static
     ```
- 6. It is possible also to view the new `TF` runnning (as before during the execution of `4.`):
+ 6. It is possible also to view the new `TF` running (as before during the execution of `4.`):
     ```shell
     rviz2
     ```
